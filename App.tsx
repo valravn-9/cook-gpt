@@ -13,7 +13,7 @@ import RecipeForm from "./src/components/RecipeForm";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function RecipeStack() {
+const RecipeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -34,7 +34,7 @@ function RecipeStack() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 const App = () => {
   return (
