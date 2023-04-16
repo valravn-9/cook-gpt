@@ -14,10 +14,10 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ color, size }) => {
             switch (route.name) {
               case "Home":
-                return <MaterialCommunityIcons name="home" size={24} color={color} />;
+                return <MaterialCommunityIcons name="home" size={size} color={color} />;
               case "Recipes":
                 return <MaterialCommunityIcons name="book-open" size={size} color={color} />;
               case "Shopping":
@@ -28,7 +28,7 @@ const App = () => {
                 return <MaterialCommunityIcons name="home" size={size} color={color} />;
             }
           },
-          tabBarActiveTintColor: "limegreen",
+          tabBarActiveTintColor: "#3b5998",
           tabBarInactiveTintColor: "gray",
         })}
       >
