@@ -1,16 +1,22 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const ProfileScreen = () => {
   return (
-    <View style={styles.profileScreen}>
-      <Text style={styles.logo}>👤</Text>
-    </View>
+    <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.gradient}>
+      <View style={styles.screen}>
+        <Text style={styles.logo}>👤</Text>
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  profileScreen: {
+  gradient: {
+    flex: 1,
+  },
+  screen: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

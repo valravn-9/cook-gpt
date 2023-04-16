@@ -1,20 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Animated } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HomeScreen = () => {
   return (
-    <View style={styles.homeScreen}>
-      <Text style={styles.logo}>🤖</Text>
-    </View>
+    <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.linearGradient}>
+      <View style={styles.screen}>
+        <Text style={styles.logo}>🤖</Text>
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  homeScreen: {
+  screen: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+  },
+  linearGradient: {
+    flex: 1,
   },
   logo: {
     fontSize: 100,

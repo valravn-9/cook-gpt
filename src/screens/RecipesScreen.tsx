@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 
@@ -16,23 +17,34 @@ const RecipesScreen = () => {
 
   const [recipes, setRecipes] = useState<Recipe[]>(getMockedRecipes());
   return (
-    <View>
-      <FlatList
-        data={recipes}
-        keyExtractor={(recipe: Recipe) => recipe.title}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity onPress={() => alert(JSON.stringify(item))}>
-              <Text style={styles.recipeEntry}>{item.title}</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
+    <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.gradient}>
+      <View style={styles.screen}>
+        <FlatList
+          data={recipes}
+          keyExtractor={(recipe: Recipe) => recipe.title}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => alert(JSON.stringify(item))}>
+                <Text style={styles.recipeEntry}>{item.title}</Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
+  screen: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
   recipeEntry: {
     fontSize: 18,
     padding: 10,
