@@ -11,6 +11,7 @@ const RecipeForm = () => {
         value={title}
         onChangeText={(text: string) => setTitle(text)}
         style={styles.textBox}
+        placeholder="Enter title"
       />
     </View>
   );
