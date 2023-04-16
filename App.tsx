@@ -6,8 +6,35 @@ import RecipesScreen from "./src/screens/RecipesScreen";
 import ShoppingScreen from "./src/screens/ShoppingScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, Button } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RecipeForm from "./src/components/RecipeForm";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function RecipeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Recipes"
+        component={RecipesScreen}
+        options={({ navigation }) => ({
+          headerRight: () => (
+            <Button title="New" onPress={() => navigation.navigate("RecipeForm")} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="RecipeForm"
+        component={RecipeForm}
+        options={({ navigation }) => ({
+          headerRight: () => <Button title="Save" onPress={() => navigation.navigate("Recipes")} />,
+        })}
+      />
+    </Stack.Navigator>
+  );
+}
 
 const App = () => {
   return (
@@ -33,7 +60,7 @@ const App = () => {
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Recipes" component={RecipesScreen} />
+        <Tab.Screen name="Recipes" component={RecipeStack} options={{ headerShown: false }} />
         <Tab.Screen name="Shopping" component={ShoppingScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
