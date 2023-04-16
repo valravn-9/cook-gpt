@@ -19,7 +19,7 @@ const RecipesScreen = ({ navigation }: any) => {
         keyExtractor={(recipe: Recipe) => recipe.title}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate("RecipeForm", { recipe: item })}>
+            <TouchableOpacity onPress={() => navigation.navigate("Recipe Form", { recipe: item })}>
               <Text style={styles.recipeEntry}>{item.title}</Text>
             </TouchableOpacity>
           );

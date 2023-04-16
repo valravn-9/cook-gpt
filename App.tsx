@@ -17,16 +17,16 @@ const RecipeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Recipes"
+        name="Recipes List"
         component={RecipesScreen}
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button title="New" onPress={() => navigation.navigate("RecipeForm")} />
+            <Button title="New" onPress={() => navigation.navigate("Recipe Form")} />
           ),
         })}
       />
       <Stack.Screen
-        name="RecipeForm"
+        name="Recipe Form"
         component={RecipeForm}
         options={({ navigation }) => ({
           headerRight: () => <Button title="Save" onPress={() => navigation.navigate("Recipes")} />,
