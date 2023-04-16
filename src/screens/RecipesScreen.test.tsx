@@ -1,7 +1,6 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import RecipesScreen from "./RecipesScreen";
-import { Alert } from "react-native";
 
 describe("RecipesScreen", () => {
   it("should render", () => {
