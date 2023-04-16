@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import RecipeForm from "./RecipeForm";
 
 describe("RecipeForm", () => {
