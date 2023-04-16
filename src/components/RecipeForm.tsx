@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
-const RecipeForm = () => {
+const RecipeForm = ({ route }: any) => {
   const [title, setTitle] = useState<string>("");
+  const { recipe } = route.params
+
+  useEffect(() => {
+    setTitle(recipe.title)
+  })
 
   return (
     <View style={styles.screen}>
