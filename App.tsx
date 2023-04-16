@@ -6,7 +6,7 @@ import RecipesScreen from "./src/screens/RecipesScreen";
 import ShoppingScreen from "./src/screens/ShoppingScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Button } from "react-native";
+import { Button } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RecipeForm from "./src/components/RecipeForm";
 
