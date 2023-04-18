@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
-const RecipeForm = ({ route }: any) => {
+const RecipeForm = ({ route, navigation }: any) => {
   const [title, setTitle] = useState<string>("");
   let initialRecipe = { id: "init", title: "init" };
   if (route) {
@@ -22,6 +22,7 @@ const RecipeForm = ({ route }: any) => {
         style={styles.textBox}
         placeholder="Enter title"
       />
+      <Button title="Capture Photo" onPress={() => navigation.navigate("PhotoCapture")} />
     </View>
   );
 };
