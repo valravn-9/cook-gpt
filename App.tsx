@@ -18,22 +18,28 @@ const RecipeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Recipes List"
+        name="recipes-list"
         component={RecipesScreen}
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button title="New" onPress={() => navigation.navigate("Recipe Form")} />
+            <Button title="New" onPress={() => navigation.navigate("recipe-form")} />
           ),
+          title: "Recipes",
         })}
       />
       <Stack.Screen
-        name="Recipe Form"
+        name="recipe-form"
         component={RecipeForm}
         options={({ navigation }) => ({
-          headerRight: () => <Button title="Save" onPress={() => navigation.navigate("Recipes")} />,
+          headerRight: () => <Button title="Save" onPress={() => navigation.navigate("recipes")} />,
+          title: "Recipe Form",
         })}
       />
-      <Stack.Screen name="PhotoCapture" component={PhotoCapture} />
+      <Stack.Screen
+        name="photo-capture"
+        component={PhotoCapture}
+        options={() => ({ title: "Photo Capture" })}
+      />
     </Stack.Navigator>
   );
 };
@@ -45,14 +51,14 @@ const App = () => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
             switch (route.name) {
-              case "Home":
+              case "home":
                 return <MaterialCommunityIcons name="home" size={size} color={color} />;
-              case "Recipes":
+              case "recipes":
                 return <MaterialCommunityIcons name="book-open" size={size} color={color} />;
-              case "Shopping":
+              case "shopping":
                 return <MaterialCommunityIcons name="cart" size={size} color={color} />;
-              case "Settings":
-                return <MaterialCommunityIcons name="account-settings" size={size} color={color} />;
+              case "settings":
+                return <MaterialCommunityIcons name="cog" size={size} color={color} />;
               default:
                 return <MaterialCommunityIcons name="home" size={size} color={color} />;
             }
@@ -61,10 +67,22 @@ const App = () => {
           tabBarInactiveTintColor: "gray",
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Recipes" component={RecipeStack} options={{ headerShown: false }} />
-        <Tab.Screen name="Shopping" component={ShoppingScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="home" component={HomeScreen} options={() => ({ title: "Home" })} />
+        <Tab.Screen
+          name="recipes"
+          component={RecipeStack}
+          options={{ headerShown: false, title: "Recipes" }}
+        />
+        <Tab.Screen
+          name="shopping"
+          component={ShoppingScreen}
+          options={() => ({ title: "Shopping" })}
+        />
+        <Tab.Screen
+          name="settings"
+          component={SettingsScreen}
+          options={() => ({ title: "Settings" })}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
