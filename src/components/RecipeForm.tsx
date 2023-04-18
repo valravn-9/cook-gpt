@@ -11,7 +11,7 @@ const RecipeForm = ({ route }: any) => {
 
   useEffect(() => {
     setTitle(initialRecipe.title)
-  })
+  }, [])
 
   return (
     <View style={styles.screen}>
