@@ -1,13 +1,20 @@
+import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 
-const RecipesScreen = ({ navigation }: any) => {
+interface RecipesScreenProps {
+  navigation: NavigationProp<any>;
+}
+
+const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    setRecipes(Array(100).fill('Recipe').map((r, i) => {
-      return { id: `${i}`, title: `${r} ${i + 1}` }
-    }));
+    setRecipes(
+      Array(100)
+        .fill("Recipe")
+        .map((r, i) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
+    );
   }, []);
 
   return (

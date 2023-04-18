@@ -1,16 +1,18 @@
+import { NavigationProp, RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 
-const RecipeForm = ({ route, navigation }: any) => {
+interface RecipeFormProps {
+  route?: RouteProp<any>;
+  navigation?: NavigationProp<any>;
+}
+
+const RecipeForm = ({ route, navigation }: RecipeFormProps) => {
   const [title, setTitle] = useState<string>("");
-  let initialRecipe = { id: "init", title: "init" };
-  if (route) {
-    const { recipe } = route.params;
-    initialRecipe = recipe;
-  }
 
   useEffect(() => {
-    setTitle(initialRecipe.title);
+    const initialRecipe = route?.params?.recipe ? route.params.recipe : { title: title };
+    setTitle(initialRecipe?.title);
   }, []);
 
   return (
@@ -22,7 +24,7 @@ const RecipeForm = ({ route, navigation }: any) => {
         style={styles.textBox}
         placeholder="Enter title"
       />
-      <Button title="Capture Photo" onPress={() => navigation.navigate("PhotoCapture")} />
+      <Button title="Capture Photo" onPress={() => navigation?.navigate("PhotoCapture")} />
     </View>
   );
 };
