@@ -6,7 +6,7 @@ const SettingsScreen = () => {
   return (
     <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.gradient}>
       <View style={styles.screen}>
-        <Text style={styles.logo}>👤</Text>
+        <Text style={styles.logo}>⚙️</Text>
       </View>
     </LinearGradient>
   );

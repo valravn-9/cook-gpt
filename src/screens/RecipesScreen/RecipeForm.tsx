@@ -24,7 +24,7 @@ const RecipeForm = ({ route, navigation }: RecipeFormProps) => {
         style={styles.textBox}
         placeholder="Enter title"
       />
-      <Button title="Capture Photo" onPress={() => navigation?.navigate("PhotoCapture")} />
+      <Button title="Capture Photo" onPress={() => navigation?.navigate("photo-capture")} />
     </View>
   );
 };
