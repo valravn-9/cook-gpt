@@ -5,6 +5,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import RecipesScreen from "./src/screens/RecipesScreen";
 import ShoppingScreen from "./src/screens/ShoppingScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import CameraScreen from "./src/screens/CameraScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -51,6 +52,8 @@ const App = () => {
                 return <MaterialCommunityIcons name="cart" size={size} color={color} />;
               case "Profile":
                 return <MaterialCommunityIcons name="account" size={size} color={color} />;
+              case "Camera":
+                return <MaterialCommunityIcons name="camera" size={size} color={color} />;
               default:
                 return <MaterialCommunityIcons name="home" size={size} color={color} />;
             }
@@ -63,6 +66,7 @@ const App = () => {
         <Tab.Screen name="Recipes" component={RecipeStack} options={{ headerShown: false }} />
         <Tab.Screen name="Shopping" component={ShoppingScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Camera" component={CameraScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
