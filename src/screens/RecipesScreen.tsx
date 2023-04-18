@@ -5,11 +5,9 @@ const RecipesScreen = ({ navigation }: any) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    const recipes: Recipe[] = [];
-    for (let i = 0; i < 100; i++) {
-      recipes.push({ id: `${i}`, title: `Recipe ${i + 1}` });
-    }
-    setRecipes(recipes);
+    setRecipes(Array(100).fill('Recipe').map((r, i) => {
+      return { id: `${i}`, title: `${r} ${i + 1}` }
+    }));
   }, []);
 
   return (
