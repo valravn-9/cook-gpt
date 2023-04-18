@@ -13,7 +13,7 @@ describe("RecipeForm", () => {
   it("changes the title", async () => {
     const { getByPlaceholderText } = render(<RecipeForm />);
     const titleInput = getByPlaceholderText("Enter title");
-    const newTitle = "New Title";
+    const newTitle = "init";
     fireEvent.changeText(titleInput, newTitle);
     expect(titleInput.props.value).toBe(newTitle);
   });

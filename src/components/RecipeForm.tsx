@@ -3,10 +3,14 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 
 const RecipeForm = ({ route }: any) => {
   const [title, setTitle] = useState<string>("");
-  const { recipe } = route.params
+  let initialRecipe = { id: 'init', title: 'init' }
+  if (route) {
+    const { recipe } = route.params
+    initialRecipe = recipe
+  }
 
   useEffect(() => {
-    setTitle(recipe.title)
+    setTitle(initialRecipe.title)
   })
 
   return (
