@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const ProfileScreen = () => {
+const SettingsScreen = () => {
   return (
     <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.gradient}>
       <View style={styles.screen}>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default SettingsScreen;

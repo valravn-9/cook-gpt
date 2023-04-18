@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import HomeScreen from "./HomeScreen";
+import ShoppingScreen from ".";
 
-describe("HomeScreen", () => {
+describe("ShoppingScreen", () => {
   it("should render", () => {
-    render(<HomeScreen />);
+    render(<ShoppingScreen />);
   });
 });

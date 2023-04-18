@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import CameraScreen from "./CameraScreen";
+import SettingsScreen from ".";
 
-describe("CameraScreen", () => {
+describe("SettingsScreen", () => {
   it("should render", () => {
-    render(<CameraScreen />);
+    render(<SettingsScreen />);
   });
 });

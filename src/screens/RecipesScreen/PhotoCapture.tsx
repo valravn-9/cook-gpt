@@ -2,7 +2,7 @@ import { Camera, CameraType } from "expo-camera";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const CameraScreen = () => {
+const PhotoCapture = () => {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CameraScreen;
+export default PhotoCapture;

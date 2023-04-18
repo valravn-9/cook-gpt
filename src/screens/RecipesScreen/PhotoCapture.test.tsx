@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import ShoppingScreen from "./ShoppingScreen";
+import PhotoCapture from "./PhotoCapture";
 
-describe("ShoppingScreen", () => {
+describe("PhotoCapture", () => {
   it("should render", () => {
-    render(<ShoppingScreen />);
+    render(<PhotoCapture />);
   });
 });

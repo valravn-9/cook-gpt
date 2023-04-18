@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import RecipesScreen from "./RecipesScreen";
+import RecipesScreen from ".";
 
 describe("RecipesScreen", () => {
   it("should render", () => {
