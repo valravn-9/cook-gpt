@@ -1,12 +1,18 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const SettingsScreen = () => {
+interface SettingsScreenProps {
+  switchTheme: () => void;
+}
+
+const SettingsScreen = ({ switchTheme }: SettingsScreenProps) => {
   return (
     <LinearGradient colors={["#fff", "#3b5998", "#000"]} style={styles.gradient}>
       <View style={styles.screen}>
-        <Text style={styles.logo}>⚙️</Text>
+        <TouchableOpacity onPress={switchTheme}>
+          <Text style={styles.logo}>⚙️</Text>
+        </TouchableOpacity>
       </View>
     </LinearGradient>
   );
