@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 interface SettingsScreenProps {
-  switchTheme: () => void;
+  switchTheme?: () => void;
 }
 
 const SettingsScreen = ({ switchTheme }: SettingsScreenProps) => {
