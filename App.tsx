@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Button } from "react-native";
+import { Button, useColorScheme, StyleSheet, ColorSchemeName } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./src/screens/HomeScreen";
 import RecipesScreen from "./src/screens/RecipesScreen";
@@ -10,13 +10,20 @@ import RecipeForm from "./src/screens/RecipesScreen/RecipeForm";
 import SettingsScreen from "./src/screens/Settings";
 import ShoppingScreen from "./src/screens/Shopping";
 import PhotoCapture from "./src/screens/RecipesScreen/PhotoCapture";
+import { useEffect, useState } from "react";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const RecipeStack = () => {
+  const styles = useColorScheme() === "light" ? lightTheme : darkTheme;
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: styles.background.backgroundColor },
+        headerTintColor: styles.text.color,
+      }}
+    >
       <Stack.Screen
         name="recipes-list"
         component={RecipesScreen}
@@ -45,6 +52,17 @@ const RecipeStack = () => {
 };
 
 const App = () => {
+  const [theme, setTheme] = useState<ColorSchemeName>(useColorScheme());
+  const [styles, setStyles] = useState(useColorScheme() === "light" ? lightTheme : darkTheme);
+
+  useEffect(() => {
+    setStyles(theme === "light" ? lightTheme : darkTheme);
+  }, [theme]);
+
+  const switchTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -63,8 +81,11 @@ const App = () => {
                 return <MaterialCommunityIcons name="home" size={size} color={color} />;
             }
           },
-          tabBarActiveTintColor: "#3b5998",
-          tabBarInactiveTintColor: "gray",
+          tabBarStyle: { backgroundColor: styles.background.backgroundColor },
+          tabBarActiveTintColor: styles.boldText.color,
+          tabBarInactiveTintColor: styles.decentText.color,
+          headerStyle: { backgroundColor: styles.background.backgroundColor },
+          headerTintColor: styles.text.color,
         })}
       >
         <Tab.Screen name="home" component={HomeScreen} options={() => ({ title: "Home" })} />
@@ -80,12 +101,26 @@ const App = () => {
         />
         <Tab.Screen
           name="settings"
-          component={SettingsScreen}
+          children={() => <SettingsScreen switchTheme={switchTheme} />}
           options={() => ({ title: "Settings" })}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
+
+const lightTheme = StyleSheet.create({
+  text: { color: "#222" },
+  background: { backgroundColor: "#fff" },
+  boldText: { color: "#3b5998" },
+  decentText: { color: "#222" },
+});
+
+const darkTheme = StyleSheet.create({
+  text: { color: "#fff" },
+  background: { backgroundColor: "#222" },
+  boldText: { color: "#7f9ddc" },
+  decentText: { color: "#ddd" },
+});
 
 export default App;
