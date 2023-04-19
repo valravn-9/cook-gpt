@@ -17,4 +17,11 @@ describe("RecipeForm", () => {
     fireEvent.changeText(titleInput, newTitle);
     expect(titleInput.props.value).toBe(newTitle);
   });
+  it("navigates to photo capture screen", async () => {
+    const navigation: any = { navigate: jest.fn() };
+    const { getByText } = render(<RecipeForm navigation={navigation} />);
+    const capturePhotoButton = getByText("Capture Photo");
+    fireEvent.press(capturePhotoButton);
+    expect(navigation.navigate).toHaveBeenCalledWith("photo-capture");
+  });
 });
