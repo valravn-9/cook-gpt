@@ -14,19 +14,9 @@ const PhotoCapture = () => {
     return <Text>No access to camera</Text>;
   }
 
-  const toggleCameraType = () => {
-    setType((current) => (current === CameraType.back ? CameraType.front : CameraType.back));
-  };
-
   return (
     <View>
-      <Camera type={type} style={styles.container}>
-        <View>
-          <TouchableOpacity onPress={toggleCameraType}>
-            <Text>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      <Camera type={type} style={styles.container} />
     </View>
   );
 };
