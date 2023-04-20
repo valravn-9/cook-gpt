@@ -1,13 +1,15 @@
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import styles from "../../../styles";
 
 interface RecipeFormProps {
   route?: RouteProp<any>;
   navigation?: NavigationProp<any>;
+  theme: any;
 }
 
-const RecipeForm = ({ route, navigation }: RecipeFormProps) => {
+const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
   const [title, setTitle] = useState<string>("");
 
   useEffect(() => {
@@ -16,12 +18,12 @@ const RecipeForm = ({ route, navigation }: RecipeFormProps) => {
   }, []);
 
   return (
-    <View style={styles.screen}>
-      <Text style={styles.formLabel}>Title</Text>
+    <View style={{ ...styles.screen, ...theme.background }}>
+      <Text style={recipeFormStyles.formLabel}>Title</Text>
       <TextInput
         value={title}
         onChangeText={(text: string) => setTitle(text)}
-        style={styles.textBox}
+        style={recipeFormStyles.textBox}
         placeholder="Enter title"
       />
       <Button title="Capture Photo" onPress={() => navigation?.navigate("photo-capture")} />
@@ -29,12 +31,7 @@ const RecipeForm = ({ route, navigation }: RecipeFormProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    height: "100%",
-    padding: 10,
-    backgroundColor: "white",
-  },
+const recipeFormStyles = StyleSheet.create({
   formLabel: {
     fontSize: 14,
     marginLeft: 5,

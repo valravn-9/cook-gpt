@@ -1,12 +1,14 @@
 import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import styles from "../../../styles";
 
 interface RecipesScreenProps {
   navigation?: NavigationProp<any>;
+  theme: any;
 }
 
-const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
+const RecipesScreen = ({ navigation, theme }: RecipesScreenProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -18,14 +20,16 @@ const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
   }, []);
 
   return (
-    <View style={styles.screen}>
+    <View style={{ ...styles.screen, ...theme.background }}>
       <FlatList
         data={recipes}
         keyExtractor={(recipe: Recipe) => recipe.title}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => navigation?.navigate("recipe-form", { recipe: item })}>
-              <Text style={styles.recipeEntry}>{item.title}</Text>
+              <Text style={{ ...styles.listEntry, ...theme.background, ...theme.text }}>
+                {item.title}
+              </Text>
             </TouchableOpacity>
           );
         }}
@@ -33,20 +37,5 @@ const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-  },
-  recipeEntry: {
-    fontSize: 18,
-    padding: 10,
-    marginBottom: 1,
-    backgroundColor: "white",
-  },
-});
 
 export default RecipesScreen;
