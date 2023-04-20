@@ -1,4 +1,4 @@
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 
 const lightTheme = StyleSheet.create({
   text: { color: "#222" },
@@ -14,6 +14,4 @@ const darkTheme = StyleSheet.create({
   decentText: { color: "#ddd" },
 });
 
-const theme = useColorScheme() === "light" ? lightTheme : darkTheme;
-
-export default theme;
+export default { lightTheme, darkTheme };
