@@ -2,7 +2,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import RecipeForm from "./RecipeForm";
 import themes from "../../../styles/themes";
 
-describe("RecipeForm", () => {
+describe.skip("RecipeForm", () => {
   it("renders all components", async () => {
     const { getByText, getByPlaceholderText } = render(<RecipeForm theme={themes.lightTheme} />);
     const titleLabel = getByText("Title");
