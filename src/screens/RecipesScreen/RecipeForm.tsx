@@ -4,11 +4,12 @@ import styles from "../../../styles";
 import { Configuration, OpenAIApi } from "openai";
 import {
   ActivityIndicator,
-  MD2Colors,
   TextInput,
   Button,
   Text,
   Snackbar,
+  MD2Colors,
+  useTheme,
 } from "react-native-paper";
 import { ScrollView, View } from "react-native";
 
@@ -17,6 +18,7 @@ interface RecipeFormProps {
 }
 
 const RecipeForm = ({ route }: RecipeFormProps) => {
+  const { colors } = useTheme();
   const [title, setTitle] = useState<string>("New Recipe");
   const [country, setCountry] = useState<string>("Germany");
   const [recipeText, setRecipeText] = useState<string>("");
@@ -49,7 +51,7 @@ const RecipeForm = ({ route }: RecipeFormProps) => {
   };
 
   return (
-    <View style={{ ...styles.screen, gap: 10 }}>
+    <View style={{ ...styles.screen, gap: 10, backgroundColor: colors.background }}>
       <TextInput
         value={title}
         onChangeText={(text: string) => setTitle(text)}
@@ -64,33 +66,23 @@ const RecipeForm = ({ route }: RecipeFormProps) => {
         mode="outlined"
         label={"Country"}
       />
-      <Button
-        children={"Generate Recipe"}
-        icon="robot"
-        onPress={generateRecipe}
-        buttonColor={MD2Colors.blue900}
-        textColor={MD2Colors.white}
-      />
+      <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} />
       <ScrollView
         contentContainerStyle={{
           flex: 1,
           justifyContent: "center",
         }}
       >
-        {loading ? (
-          <ActivityIndicator animating={true} color={MD2Colors.blue900} size="large" />
-        ) : (
-          <Text>{recipeText}</Text>
-        )}
+        {loading ? <ActivityIndicator animating={true} size="large" /> : <Text>{recipeText}</Text>}
       </ScrollView>
       <Snackbar
         children={"Could not generate recipe"}
         visible={snackbarVisible}
         duration={3000}
         onDismiss={() => setSnackbarVisible(false)}
-        style={{ backgroundColor: MD2Colors.red900 }}
         icon="close"
         onIconPress={() => setSnackbarVisible(false)}
+        style={{ backgroundColor: MD2Colors.red500 }}
       />
     </View>
   );

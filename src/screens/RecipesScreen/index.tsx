@@ -4,12 +4,14 @@ import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import styles from "../../../styles";
 import { Recipe } from "../../typings/recipe";
 import { AppScreen } from "../../typings/app";
+import { useTheme } from "react-native-paper";
 
 interface RecipesScreenProps {
   navigation?: NavigationProp<any>;
 }
 
 const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
+  const { colors } = useTheme();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
   }, []);
 
   return (
-    <View style={{ ...styles.screen }}>
+    <View style={{ ...styles.screen, backgroundColor: colors.background }}>
       <FlatList
         data={recipes}
         keyExtractor={(recipe: Recipe) => recipe.title}
