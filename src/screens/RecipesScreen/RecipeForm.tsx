@@ -2,16 +2,8 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles";
 import { Configuration, OpenAIApi } from "openai";
-import {
-  Text,
-  ActivityIndicator,
-  MD2Colors,
-  TextInput,
-  Button,
-  IconButton,
-  MD3Colors,
-} from "react-native-paper";
-import { View } from "react-native";
+import { ActivityIndicator, MD2Colors, TextInput, Button, Text } from "react-native-paper";
+import { ScrollView, View } from "react-native";
 
 interface RecipeFormProps {
   route?: RouteProp<any>;
@@ -20,7 +12,7 @@ interface RecipeFormProps {
 }
 
 const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>("New Recipe");
   const [country, setCountry] = useState<string>("Germany");
   const [recipeText, setRecipeText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,22 +23,19 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
   }, []);
 
   const generateRecipe = async () => {
-    console.log("Generating recipe");
-    const requestText = `Can you generate me a recipe from ${country}`;
     const apiKey = "<YOUR_API_KEY>";
-
     const configuration = new Configuration({
       apiKey: apiKey,
     });
-    const openai = new OpenAIApi(configuration);
-
+    const openAI = new OpenAIApi(configuration);
+    const requestText = `Can you generate me a recipe from ${country}`;
     setLoading(true);
     try {
-      const completion = await openai.createChatCompletion({
+      const response = await openAI.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: requestText }],
       });
-      setRecipeText(`${completion.data.choices[0].message?.content}`);
+      setRecipeText(`${response.data.choices[0].message?.content}`);
     } catch (error) {
       setRecipeText(`Could not generate recipe.\n${error}`);
     }
@@ -54,25 +43,20 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
   };
 
   return (
-    <View style={{ ...styles.screen, ...theme.background }}>
-      <Text>Title</Text>
+    <View style={{ ...styles.screen, gap: 10 }}>
       <TextInput
         value={title}
         onChangeText={(text: string) => setTitle(text)}
         placeholder="Enter title"
         mode="outlined"
+        label={"Title"}
       />
-      <IconButton
-        icon="camera"
-        iconColor={MD2Colors.blue900}
-        onPress={() => navigation?.navigate("photo-capture")}
-      />
-      <Text>Country</Text>
       <TextInput
         value={country}
         onChangeText={(country: string) => setCountry(country)}
         placeholder="Enter country"
         mode="outlined"
+        label={"Country"}
       />
       <Button
         children={"Generate Recipe"}
@@ -80,11 +64,18 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
         buttonColor={MD2Colors.blue900}
         textColor={MD2Colors.white}
       />
-      {loading ? (
-        <ActivityIndicator animating={true} color={MD2Colors.blue900} size="large" />
-      ) : (
-        <Text>{recipeText}</Text>
-      )}
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
+        {loading ? (
+          <ActivityIndicator animating={true} color={MD2Colors.blue900} size="large" />
+        ) : (
+          <Text>{recipeText}</Text>
+        )}
+      </ScrollView>
     </View>
   );
 };
