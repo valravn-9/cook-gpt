@@ -11,6 +11,7 @@ import SettingsScreen from "./src/screens/Settings";
 import ShoppingScreen from "./src/screens/Shopping";
 import PhotoCapture from "./src/screens/RecipesScreen/PhotoCapture";
 import useThemes from "./hooks/useThemes";
+import "react-native-url-polyfill/auto";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
