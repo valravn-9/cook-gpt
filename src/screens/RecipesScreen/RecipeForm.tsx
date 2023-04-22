@@ -8,7 +8,6 @@ import { ScrollView, View } from "react-native";
 interface RecipeFormProps {
   route?: RouteProp<any>;
   navigation?: NavigationProp<any>;
-  theme: any;
 }
 
 const RecipeForm = ({ route }: RecipeFormProps) => {

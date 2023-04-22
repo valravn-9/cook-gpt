@@ -36,7 +36,7 @@ const RecipeStack = ({ theme }: any) => {
       />
       <Stack.Screen
         name="recipe-form"
-        children={({ navigation }) => <RecipeForm theme={theme} navigation={navigation} />}
+        children={({ navigation }) => <RecipeForm navigation={navigation} />}
         options={({ navigation }) => ({
           headerRight: () => <Button title="Save" onPress={() => navigation.navigate("recipes")} />,
           title: "Recipe Form",
