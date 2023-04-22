@@ -1,7 +1,8 @@
 import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import styles from "../../../styles";
+import { Recipe } from "../../typings/recipe";
 
 interface RecipesScreenProps {
   navigation?: NavigationProp<any>;
@@ -15,7 +16,7 @@ const RecipesScreen = ({ navigation, theme }: RecipesScreenProps) => {
     setRecipes(
       Array(100)
         .fill("Recipe")
-        .map((r, i) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
+        .map((r: Recipe, i: number) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
     );
   }, []);
 
