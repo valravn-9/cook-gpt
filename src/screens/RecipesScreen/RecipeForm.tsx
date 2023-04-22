@@ -67,6 +67,7 @@ const RecipeForm = ({ route }: RecipeFormProps) => {
       />
       <Button
         children={"Generate Recipe"}
+        icon="robot"
         onPress={generateRecipe}
         buttonColor={MD2Colors.blue900}
         textColor={MD2Colors.white}
