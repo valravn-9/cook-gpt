@@ -11,7 +11,7 @@ interface RecipeFormProps {
   theme: any;
 }
 
-const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
+const RecipeForm = ({ route }: RecipeFormProps) => {
   const [title, setTitle] = useState<string>("New Recipe");
   const [country, setCountry] = useState<string>("Germany");
   const [recipeText, setRecipeText] = useState<string>("");
