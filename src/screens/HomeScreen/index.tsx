@@ -2,12 +2,8 @@ import React from "react";
 import { View, Text } from "react-native";
 import styles from "../../../styles";
 
-interface HomeScreenProps {
-  theme: any;
-}
-
-const HomeScreen = ({ theme }: HomeScreenProps) => {
-  return <View style={{ ...styles.screen, ...theme.background }}></View>;
+const HomeScreen = () => {
+  return <View style={{ ...styles.screen }}></View>;
 };
 
 export default HomeScreen;

@@ -1,12 +1,7 @@
 import { Camera, CameraType } from "expo-camera";
-import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-interface PhotoCaptureProps {
-  theme: any;
-}
-
-const PhotoCapture = ({ theme }: PhotoCaptureProps) => {
+const PhotoCapture = () => {
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   if (!permission) {

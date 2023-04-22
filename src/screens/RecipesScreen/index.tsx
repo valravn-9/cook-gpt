@@ -7,31 +7,30 @@ import { AppScreen } from "../../typings/app";
 
 interface RecipesScreenProps {
   navigation?: NavigationProp<any>;
-  theme: any;
 }
 
-const RecipesScreen = ({ navigation, theme }: RecipesScreenProps) => {
+const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
     setRecipes(
       Array<Recipe>(100)
-        .fill({id: '1', title: 'recipe'})
-        .map((r, i) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
+        .fill({ id: "1", title: "Recipe" })
+        .map((r, i) => ({ id: `${i}`, title: `${r.title} ${i + 1}` }))
     );
   }, []);
 
   return (
-    <View style={{ ...styles.screen, ...theme.background }}>
+    <View style={{ ...styles.screen }}>
       <FlatList
         data={recipes}
         keyExtractor={(recipe: Recipe) => recipe.title}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation?.navigate(AppScreen.RECIPE_FORM, { recipe: item })}>
-              <Text style={{ ...styles.listEntry, ...theme.background, ...theme.text }}>
-                {item.title}
-              </Text>
+            <TouchableOpacity
+              onPress={() => navigation?.navigate(AppScreen.RECIPE_FORM, { recipe: item })}
+            >
+              <Text style={{ ...styles.listEntry }}>{item.title}</Text>
             </TouchableOpacity>
           );
         }}

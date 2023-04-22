@@ -1,14 +1,13 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 import PhotoCapture from "./PhotoCapture";
-import themes from "../../../styles/themes";
 
 describe("PhotoCapture", () => {
   it("should render", () => {
-    render(<PhotoCapture theme={themes.lightTheme} />);
+    render(<PhotoCapture />);
   });
   it("should render no access to camera hint", () => {
-    const { getByText } = render(<PhotoCapture theme={themes.lightTheme} />);
+    const { getByText } = render(<PhotoCapture />);
     expect(getByText("No access to camera")).toBeDefined;
   });
 });
