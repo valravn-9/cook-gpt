@@ -1,8 +1,9 @@
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import styles from "../../../styles";
 import { Configuration, OpenAIApi } from "openai";
+import { Text, ActivityIndicator, MD2Colors, TextInput, Button } from "react-native-paper";
+import { View } from "react-native";
 
 interface RecipeFormProps {
   route?: RouteProp<any>;
@@ -46,41 +47,29 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
 
   return (
     <View style={{ ...styles.screen, ...theme.background }}>
-      <Text style={recipeFormStyles.formLabel}>Title</Text>
+      <Text>Title</Text>
       <TextInput
         value={title}
         onChangeText={(text: string) => setTitle(text)}
-        style={recipeFormStyles.textBox}
         placeholder="Enter title"
+        mode="outlined"
       />
-      <Button title="Capture Photo" onPress={() => navigation?.navigate("photo-capture")} />
-      <Text style={recipeFormStyles.formLabel}>Country</Text>
+      <Button children={"Capture Photo"} onPress={() => navigation?.navigate("photo-capture")} />
+      <Text>Country</Text>
       <TextInput
         value={country}
         onChangeText={(country: string) => setCountry(country)}
-        style={recipeFormStyles.textBox}
         placeholder="Enter country"
+        mode="outlined"
       />
-      <Button title="Generate Recipe" onPress={generateRecipe} />
-      <Text>{loading ? "Loading..." : recipeText}</Text>
+      <Button children={"Generate Recipe"} onPress={generateRecipe} />
+      {loading ? (
+        <ActivityIndicator animating={true} color={MD2Colors.red800} />
+      ) : (
+        <Text>{recipeText}</Text>
+      )}
     </View>
   );
 };
-
-const recipeFormStyles = StyleSheet.create({
-  formLabel: {
-    fontSize: 14,
-    marginLeft: 5,
-  },
-  textBox: {
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    marginBottom: 15,
-    padding: 5,
-    margin: 5,
-  },
-});
 
 export default RecipeForm;
