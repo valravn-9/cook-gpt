@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import styles from "../../../styles";
 import { Recipe } from "../../typings/recipe";
+import { AppScreen } from "../../typings/app";
 
 interface RecipesScreenProps {
   navigation?: NavigationProp<any>;
@@ -14,9 +15,9 @@ const RecipesScreen = ({ navigation, theme }: RecipesScreenProps) => {
 
   useEffect(() => {
     setRecipes(
-      Array(100)
-        .fill("Recipe")
-        .map((r: Recipe, i: number) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
+      Array<Recipe>(100)
+        .fill({id: '1', title: 'recipe'})
+        .map((r, i) => ({ id: `${i}`, title: `${r} ${i + 1}` }))
     );
   }, []);
 
@@ -27,7 +28,7 @@ const RecipesScreen = ({ navigation, theme }: RecipesScreenProps) => {
         keyExtractor={(recipe: Recipe) => recipe.title}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation?.navigate("recipe-form", { recipe: item })}>
+            <TouchableOpacity onPress={() => navigation?.navigate(AppScreen.RECIPE_FORM, { recipe: item })}>
               <Text style={{ ...styles.listEntry, ...theme.background, ...theme.text }}>
                 {item.title}
               </Text>

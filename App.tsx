@@ -12,6 +12,7 @@ import ShoppingScreen from "./src/screens/Shopping";
 import PhotoCapture from "./src/screens/RecipesScreen/PhotoCapture";
 import useThemes from "./hooks/useThemes";
 import "react-native-url-polyfill/auto";
+import { AppScreen } from "./src/typings/app";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -25,20 +26,20 @@ const RecipeStack = ({ theme }: any) => {
       }}
     >
       <Stack.Screen
-        name="recipes-list"
+        name={AppScreen.RECIPES}
         children={({ navigation }) => <RecipesScreen theme={theme} navigation={navigation} />}
         options={({ navigation }) => ({
           headerRight: () => (
-            <Button title="New" onPress={() => navigation.navigate("recipe-form")} />
+            <Button title="New" onPress={() => navigation.navigate(AppScreen.RECIPE_FORM)} />
           ),
           title: "Recipes",
         })}
       />
       <Stack.Screen
-        name="recipe-form"
+        name={AppScreen.RECIPE_FORM}
         children={({ navigation }) => <RecipeForm navigation={navigation} />}
         options={({ navigation }) => ({
-          headerRight: () => <Button title="Save" onPress={() => navigation.navigate("recipes")} />,
+          headerRight: () => <Button title="Save" onPress={() => navigation.navigate(AppScreen.RECIPES)} />,
           title: "Recipe Form",
         })}
       />
@@ -57,7 +58,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route, navigation }) => ({
+        screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
             switch (route.name) {
               case "home":
@@ -80,22 +81,22 @@ const App = () => {
         })}
       >
         <Tab.Screen
-          name="home"
+          name={AppScreen.HOME}
           children={() => <HomeScreen theme={theme} />}
           options={() => ({ title: "Home" })}
         />
         <Tab.Screen
-          name="recipes"
+          name={AppScreen.HOME}
           children={() => <RecipeStack theme={theme} />}
           options={{ headerShown: false, title: "Recipes" }}
         />
         <Tab.Screen
-          name="shopping"
+          name={AppScreen.SHOPPING}
           children={() => <ShoppingScreen theme={theme} />}
           options={() => ({ title: "Shopping" })}
         />
         <Tab.Screen
-          name="settings"
+          name={AppScreen.SETTINGS}
           children={() => <SettingsScreen theme={theme} switchTheme={switchTheme} />}
           options={() => ({ title: "Settings" })}
         />
