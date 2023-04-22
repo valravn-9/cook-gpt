@@ -2,7 +2,15 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles";
 import { Configuration, OpenAIApi } from "openai";
-import { Text, ActivityIndicator, MD2Colors, TextInput, Button } from "react-native-paper";
+import {
+  Text,
+  ActivityIndicator,
+  MD2Colors,
+  TextInput,
+  Button,
+  IconButton,
+  MD3Colors,
+} from "react-native-paper";
 import { View } from "react-native";
 
 interface RecipeFormProps {
@@ -54,7 +62,11 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
         placeholder="Enter title"
         mode="outlined"
       />
-      <Button children={"Capture Photo"} onPress={() => navigation?.navigate("photo-capture")} />
+      <IconButton
+        icon="camera"
+        iconColor={MD2Colors.blue900}
+        onPress={() => navigation?.navigate("photo-capture")}
+      />
       <Text>Country</Text>
       <TextInput
         value={country}
@@ -62,9 +74,14 @@ const RecipeForm = ({ route, navigation, theme }: RecipeFormProps) => {
         placeholder="Enter country"
         mode="outlined"
       />
-      <Button children={"Generate Recipe"} onPress={generateRecipe} />
+      <Button
+        children={"Generate Recipe"}
+        onPress={generateRecipe}
+        buttonColor={MD2Colors.blue900}
+        textColor={MD2Colors.white}
+      />
       {loading ? (
-        <ActivityIndicator animating={true} color={MD2Colors.red800} />
+        <ActivityIndicator animating={true} color={MD2Colors.blue900} size="large" />
       ) : (
         <Text>{recipeText}</Text>
       )}
