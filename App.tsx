@@ -86,7 +86,7 @@ const App = () => {
           options={() => ({ title: "Home" })}
         />
         <Tab.Screen
-          name={AppScreen.HOME}
+          name={AppScreen.RECIPES}
           children={() => <RecipeStack theme={theme} />}
           options={{ headerShown: false, title: "Recipes" }}
         />
