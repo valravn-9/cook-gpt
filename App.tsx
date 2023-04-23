@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CommonActions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -6,15 +6,27 @@ import RecipesScreen from "./src/screens/RecipesScreen";
 import SettingsScreen from "./src/screens/Settings";
 import ShoppingScreen from "./src/screens/Shopping";
 import "react-native-url-polyfill/auto";
-import { BottomNavigation, MD3DarkTheme, Provider as PaperProvider } from "react-native-paper";
+import {
+  BottomNavigation,
+  MD3DarkTheme,
+  MD3LightTheme,
+  MD3Theme,
+  Provider as PaperProvider,
+} from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppScreen } from "./src/typings/app";
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  const [theme, setTheme] = useState<MD3Theme>(MD3DarkTheme);
+
+  const switchTheme = () => {
+    setTheme(theme.dark ? MD3LightTheme : MD3DarkTheme);
+  };
+
   return (
-    <PaperProvider theme={MD3DarkTheme}>
+    <PaperProvider theme={theme}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={{ headerShown: false }}
@@ -80,7 +92,7 @@ const App = () => {
           />
           <Tab.Screen
             name={AppScreen.SETTINGS}
-            component={SettingsScreen}
+            children={() => <SettingsScreen switchTheme={switchTheme} theme={theme} />}
             options={{
               tabBarLabel: "Settings",
               tabBarIcon: ({ color, size }) => {
