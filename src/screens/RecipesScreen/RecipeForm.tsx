@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import { ActivityIndicator, TextInput, Button, Text } from "react-native-paper";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import Form from "../../components/Form";
 import { Recipe } from "../../typings/recipe";
 
@@ -17,7 +17,7 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const generateRecipe = async () => {
-    const apiKey = "<YOUR_API_KEY>";
+    const apiKey = "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";
     const configuration = new Configuration({
       apiKey: apiKey,
     });
@@ -65,18 +65,12 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
           onPress={generateRecipe}
           mode="contained"
         />
-        <ScrollView
-          contentContainerStyle={{
-            flex: 1,
-            justifyContent: "center",
-          }}
-        >
-          {loading ? (
-            <ActivityIndicator animating={true} size="large" />
-          ) : (
-            <Text>{recipe.result}</Text>
-          )}
-        </ScrollView>
+
+        {loading ? (
+          <ActivityIndicator animating={true} size="large" />
+        ) : (
+          <Text>{recipe.result}</Text>
+        )}
       </View>
     </Form>
   );
