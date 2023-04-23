@@ -64,7 +64,7 @@ const App = () => {
             options={{
               tabBarLabel: "Recipes",
               tabBarIcon: ({ color, size }) => {
-                return <Icon name="book" size={size} color={color} />;
+                return <Icon name="book-open" size={size} color={color} />;
               },
             }}
           />
@@ -74,7 +74,7 @@ const App = () => {
             options={{
               tabBarLabel: "Shopping",
               tabBarIcon: ({ color, size }) => {
-                return <Icon name="shopping" size={size} color={color} />;
+                return <Icon name="cart" size={size} color={color} />;
               },
             }}
           />
