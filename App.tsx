@@ -17,9 +17,7 @@ const App = () => {
     <PaperProvider theme={MD3DarkTheme}>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
+          screenOptions={{ headerShown: false }}
           tabBar={({ navigation, state, descriptors, insets }) => (
             <BottomNavigation.Bar
               navigationState={state}
@@ -41,11 +39,7 @@ const App = () => {
               }}
               renderIcon={({ route, focused, color }) => {
                 const { options } = descriptors[route.key];
-                if (options.tabBarIcon) {
-                  return options.tabBarIcon({ focused, color, size: 24 });
-                }
-
-                return null;
+                return options.tabBarIcon ? options.tabBarIcon({ focused, color, size: 24 }) : null;
               }}
               getLabelText={({ route }: any) => {
                 const { options } = descriptors[route.key];
