@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Recipe } from "../../typings/recipe";
 import Screen from "../../components/Screen";
-import { List } from "react-native-paper";
+import RecipeItem from "./RecipeItem";
 
 const RecipesScreen = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -19,7 +19,7 @@ const RecipesScreen = () => {
       TitleBarOptions={{ title: "Recipes", buttons: [{ icon: "plus", onPress: () => void 0 }] }}
     >
       {recipes.map((recipe: Recipe) => (
-        <List.Item key={recipe.id} title={recipe.title}></List.Item>
+        <RecipeItem key={recipe.id} recipe={recipe} />
       ))}
     </Screen>
   );
