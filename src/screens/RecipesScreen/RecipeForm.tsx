@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
 import { ActivityIndicator, TextInput, Button, Text } from "react-native-paper";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import Form from "../../components/Form";
 import { Recipe } from "../../typings/recipe";
 
@@ -44,33 +44,40 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
       onSave={() => onSave(recipe)}
       item={{}}
     >
-      <TextInput
-        value={recipe.title}
-        onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
-        placeholder="Enter title"
-        mode="outlined"
-        label={"Title"}
-      />
-      <TextInput
-        value={recipe.country}
-        onChangeText={(text: string) => setRecipe({ ...recipe, country: text })}
-        placeholder="Enter country"
-        mode="outlined"
-        label={"Country"}
-      />
-      <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} />
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: "center",
-        }}
-      >
-        {loading ? (
-          <ActivityIndicator animating={true} size="large" />
-        ) : (
-          <Text>{recipe.result}</Text>
-        )}
-      </ScrollView>
+      <View style={{ gap: 10 }}>
+        <TextInput
+          value={recipe.title}
+          onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
+          placeholder="Enter title"
+          mode="outlined"
+          label={"Title"}
+        />
+        <TextInput
+          value={recipe.country}
+          onChangeText={(text: string) => setRecipe({ ...recipe, country: text })}
+          placeholder="Enter country"
+          mode="outlined"
+          label={"Country"}
+        />
+        <Button
+          children={"Generate Recipe"}
+          icon="robot"
+          onPress={generateRecipe}
+          mode="contained"
+        />
+        <ScrollView
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          {loading ? (
+            <ActivityIndicator animating={true} size="large" />
+          ) : (
+            <Text>{recipe.result}</Text>
+          )}
+        </ScrollView>
+      </View>
     </Form>
   );
 };
