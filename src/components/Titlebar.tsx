@@ -15,7 +15,6 @@ interface ITitlebarProps {
 const Titlebar = ({ title, buttons, backButton }: ITitlebarProps) => {
   return (
     <Appbar.Header>
-      <Appbar.BackAction onPress={() => {}} />
       {backButton ? <Appbar.BackAction onPress={backButton.onPress} /> : null}
       <Appbar.Content title={title} />
       {buttons?.map((button: IButtonProps) => {
