@@ -3,7 +3,7 @@ export interface IButtonProps {
   onPress: () => void;
 }
 
-export interface ITitlebarProps {
+export interface ITitleBarProps {
   title: string;
   backButton?: IButtonProps;
   buttons?: IButtonProps[];

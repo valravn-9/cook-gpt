@@ -1,13 +1,13 @@
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Surface } from "react-native-paper";
-import Titlebar from "./Titlebar";
+import TitleBar from "./TitleBar";
 import { IScreenProps } from "../typings/screen";
 
-const Screen = ({ titlebarOptions, children }: IScreenProps) => {
+const Screen = ({ TitleBarOptions, children }: IScreenProps) => {
   return (
     <Surface style={styles.surface}>
-      <Titlebar {...titlebarOptions} />
+      <TitleBar {...TitleBarOptions} />
       <ScrollView>{children}</ScrollView>
     </Surface>
   );

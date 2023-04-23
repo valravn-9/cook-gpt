@@ -11,7 +11,7 @@ describe("RecipesScreen", () => {
   });
   it("should navigate to recipe form screen", () => {
     const navigation: any = { navigate: jest.fn() };
-    const { getByText } = render(<RecipesScreen navigation={navigation} />);
+    const { getByText } = render(<RecipesScreen />);
     const recipeEntry = getByText("Recipe 1");
     fireEvent.press(recipeEntry);
     expect(navigation.navigate).toHaveBeenCalledWith("recipe-form", {

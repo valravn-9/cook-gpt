@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { ITitlebarProps } from "./titlebar";
+import { ITitleBarProps } from "./titleBar";
 
 export interface IScreenProps {
-  titlebarOptions: ITitlebarProps;
+  TitleBarOptions: ITitleBarProps;
   children?: ReactNode;
 }

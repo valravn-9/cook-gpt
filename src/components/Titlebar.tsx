@@ -1,8 +1,8 @@
 import React from "react";
 import { Appbar } from "react-native-paper";
-import { ITitlebarProps, IButtonProps } from "../typings/titlebar";
+import { IButtonProps, ITitleBarProps } from "../typings/titleBar";
 
-const Titlebar = ({ title, buttons, backButton }: ITitlebarProps) => {
+const TitleBar = ({ title, buttons, backButton }: ITitleBarProps) => {
   return (
     <Appbar.Header>
       {backButton ? <Appbar.BackAction onPress={backButton.onPress} /> : null}
@@ -14,4 +14,4 @@ const Titlebar = ({ title, buttons, backButton }: ITitlebarProps) => {
   );
 };
 
-export default Titlebar;
+export default TitleBar;
