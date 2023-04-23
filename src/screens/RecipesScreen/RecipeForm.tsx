@@ -17,7 +17,7 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const generateRecipe = async () => {
-    const apiKey = "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";
+    const apiKey = "<Your API Key>";
     const configuration = new Configuration({
       apiKey: apiKey,
     });
