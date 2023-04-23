@@ -1,95 +1,98 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { CommonActions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Button } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./src/screens/HomeScreen";
 import RecipesScreen from "./src/screens/RecipesScreen";
-import RecipeForm from "./src/screens/RecipesScreen/RecipeForm";
 import SettingsScreen from "./src/screens/Settings";
 import ShoppingScreen from "./src/screens/Shopping";
-import PhotoCapture from "./src/screens/RecipesScreen/PhotoCapture";
 import "react-native-url-polyfill/auto";
+import { BottomNavigation, MD3DarkTheme, Provider as PaperProvider } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppScreen } from "./src/typings/app";
-import { Provider as PaperProvider } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-const RecipeStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={AppScreen.RECIPES}
-        children={({ navigation }) => <RecipesScreen navigation={navigation} />}
-        options={({ navigation }) => ({
-          headerRight: () => (
-            <Button title="New" onPress={() => navigation.navigate(AppScreen.RECIPE_FORM)} />
-          ),
-          title: "Recipes",
-        })}
-      />
-      <Stack.Screen
-        name={AppScreen.RECIPE_FORM}
-        children={() => <RecipeForm />}
-        options={({ navigation }) => ({
-          headerRight: () => (
-            <Button title="Save" onPress={() => navigation.navigate(AppScreen.RECIPES)} />
-          ),
-          title: "Recipe Form",
-        })}
-      />
-      <Stack.Screen
-        name="photo-capture"
-        children={() => <PhotoCapture />}
-        options={() => ({ title: "Photo Capture" })}
-      />
-    </Stack.Navigator>
-  );
-};
 
 const App = () => {
   return (
-    <PaperProvider>
+    <PaperProvider theme={MD3DarkTheme}>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
-              switch (route.name) {
-                case "home":
-                  return <MaterialCommunityIcons name="home" size={size} color={color} />;
-                case "recipes":
-                  return <MaterialCommunityIcons name="book-open" size={size} color={color} />;
-                case "shopping":
-                  return <MaterialCommunityIcons name="cart" size={size} color={color} />;
-                case "settings":
-                  return <MaterialCommunityIcons name="cog" size={size} color={color} />;
-                default:
-                  return <MaterialCommunityIcons name="home" size={size} color={color} />;
-              }
-            },
-          })}
+          screenOptions={{
+            headerShown: false,
+          }}
+          tabBar={({ navigation, state, descriptors, insets }) => (
+            <BottomNavigation.Bar
+              navigationState={state}
+              safeAreaInsets={insets}
+              onTabPress={({ route, preventDefault }) => {
+                const event = navigation.emit({
+                  type: "tabPress",
+                  target: route.key,
+                  canPreventDefault: true,
+                });
+                if (event.defaultPrevented) {
+                  preventDefault();
+                } else {
+                  navigation.dispatch({
+                    ...CommonActions.navigate(route.name, route.params),
+                    target: state.key,
+                  });
+                }
+              }}
+              renderIcon={({ route, focused, color }) => {
+                const { options } = descriptors[route.key];
+                if (options.tabBarIcon) {
+                  return options.tabBarIcon({ focused, color, size: 24 });
+                }
+
+                return null;
+              }}
+              getLabelText={({ route }: any) => {
+                const { options } = descriptors[route.key];
+                return options.tabBarLabel || options.title || route.title;
+              }}
+            />
+          )}
         >
           <Tab.Screen
             name={AppScreen.HOME}
-            children={() => <HomeScreen />}
-            options={() => ({ title: "Home" })}
+            component={HomeScreen}
+            options={{
+              tabBarLabel: "Home",
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="home" size={size} color={color} />;
+              },
+            }}
           />
           <Tab.Screen
             name={AppScreen.RECIPES}
-            children={() => <RecipeStack />}
-            options={{ headerShown: false, title: "Recipes" }}
+            component={RecipesScreen}
+            options={{
+              tabBarLabel: "Recipes",
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="book" size={size} color={color} />;
+              },
+            }}
           />
           <Tab.Screen
             name={AppScreen.SHOPPING}
-            children={() => <ShoppingScreen />}
-            options={() => ({ title: "Shopping" })}
+            component={ShoppingScreen}
+            options={{
+              tabBarLabel: "Shopping",
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="shopping" size={size} color={color} />;
+              },
+            }}
           />
           <Tab.Screen
             name={AppScreen.SETTINGS}
-            children={() => <SettingsScreen />}
-            options={() => ({ title: "Settings" })}
+            component={SettingsScreen}
+            options={{
+              tabBarLabel: "Settings",
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name="cog" size={size} color={color} />;
+              },
+            }}
           />
         </Tab.Navigator>
       </NavigationContainer>
