@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
-import { ActivityIndicator, TextInput, Button, Text } from "react-native-paper";
+import { ActivityIndicator, TextInput, Button } from "react-native-paper";
 import { View } from "react-native";
 import Form from "../../components/Form";
 import { Recipe } from "../../typings/recipe";
@@ -42,7 +42,7 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
       visible={visible}
       onCancel={onCancel}
       onSave={() => onSave(recipe)}
-      item={{}}
+      item={recipe}
     >
       <View style={{ gap: 10 }}>
         <TextInput
@@ -69,7 +69,15 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
         {loading ? (
           <ActivityIndicator animating={true} size="large" />
         ) : (
-          <Text>{recipe.result}</Text>
+          <TextInput
+            value={recipe.result}
+            onChangeText={(text: string) => setRecipe({ ...recipe, result: text })}
+            placeholder="Enter Recipe content"
+            mode="outlined"
+            label={"Recipe content"}
+            multiline={true}
+            disabled={true}
+          />
         )}
       </View>
     </Form>
