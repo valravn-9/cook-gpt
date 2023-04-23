@@ -3,8 +3,8 @@ import { CommonActions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
 import RecipesScreen from "./src/screens/RecipesScreen";
-import SettingsScreen from "./src/screens/Settings";
-import ShoppingScreen from "./src/screens/Shopping";
+import SettingsScreen from "./src/screens/SettingsScreen";
+import ShoppingScreen from "./src/screens/ShoppingScreen";
 import "react-native-url-polyfill/auto";
 import {
   BottomNavigation,
