@@ -1,8 +1,13 @@
 import React from "react";
 import Titlebar from "../../components/Titlebar";
+import Screen from "../../components/Screen";
 
 const ShoppingScreen = () => {
-  return <Titlebar title="Shopping" />;
+  return (
+    <Screen>
+      <Titlebar title="Shopping" />
+    </Screen>
+  );
 };
 
 export default ShoppingScreen;
