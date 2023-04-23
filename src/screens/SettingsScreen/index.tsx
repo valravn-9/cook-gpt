@@ -10,7 +10,7 @@ interface ISettingsScreen {
 
 const SettingsScreen = ({ switchTheme, theme }: ISettingsScreen) => {
   return (
-    <Screen TitleBarOptions={{ title: "Settings" }}>
+    <Screen titleBarOptions={{ title: "Settings" }}>
       <SettingsItem
         title="Light Theme"
         subtitle="Set light theme for the whole app"
