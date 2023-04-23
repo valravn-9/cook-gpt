@@ -1,11 +1,8 @@
 import React from "react";
-import { View } from "react-native";
-import styles from "../../../styles";
-import { useTheme } from "react-native-paper";
+import Titlebar from "../../components/Titlebar";
 
 const ShoppingScreen = () => {
-  const { colors } = useTheme();
-  return <View style={{ ...styles.screen, backgroundColor: colors.background }}></View>;
+  return <Titlebar title="Shopping" />;
 };
 
 export default ShoppingScreen;
