@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { CommonActions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
