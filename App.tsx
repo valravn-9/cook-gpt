@@ -6,23 +6,19 @@ import RecipesScreen from "./src/screens/RecipesScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import ShoppingScreen from "./src/screens/ShoppingScreen";
 import "react-native-url-polyfill/auto";
-import {
-  BottomNavigation,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD3Theme,
-  Provider as PaperProvider,
-} from "react-native-paper";
+import { BottomNavigation, MD3Theme, Provider as PaperProvider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AppScreen } from "./src/typings/app";
+import LightTheme from "./src/themes/light";
+import DarkTheme from "./src/themes/dark";
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [theme, setTheme] = useState<MD3Theme>(MD3DarkTheme);
+  const [theme, setTheme] = useState<MD3Theme>(DarkTheme);
 
   const switchTheme = () => {
-    setTheme(theme.dark ? MD3LightTheme : MD3DarkTheme);
+    setTheme(theme.dark ? LightTheme : DarkTheme);
   };
 
   return (
@@ -34,6 +30,7 @@ const App = () => {
             <BottomNavigation.Bar
               navigationState={state}
               safeAreaInsets={insets}
+              activeColor={theme.colors.primary}
               onTabPress={({ route, preventDefault }) => {
                 const event = navigation.emit({
                   type: "tabPress",
