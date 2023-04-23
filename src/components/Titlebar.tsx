@@ -8,7 +8,7 @@ const TitleBar = ({ title, buttons, backButton }: ITitleBarProps) => {
       {backButton ? <Appbar.BackAction onPress={backButton.onPress} /> : null}
       <Appbar.Content title={title} />
       {buttons?.map((button: IButtonProps) => {
-        return <Appbar.Action icon={button.icon} onPress={button.onPress} />;
+        return <Appbar.Action key={button.icon} icon={button.icon} onPress={button.onPress} />;
       })}
     </Appbar.Header>
   );
