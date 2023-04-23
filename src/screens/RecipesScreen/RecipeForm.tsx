@@ -1,6 +1,5 @@
-import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import styles from "../../../styles";
 import { Configuration, OpenAIApi } from "openai";
 import {
   ActivityIndicator,
@@ -13,11 +12,11 @@ import {
 } from "react-native-paper";
 import { ScrollView, View } from "react-native";
 
-interface RecipeFormProps {
+interface IProps {
   route?: RouteProp<any>;
 }
 
-const RecipeForm = ({ route }: RecipeFormProps) => {
+const RecipeForm = ({ route }: IProps) => {
   const { colors } = useTheme();
   const [title, setTitle] = useState<string>("New Recipe");
   const [country, setCountry] = useState<string>("Germany");
@@ -51,7 +50,7 @@ const RecipeForm = ({ route }: RecipeFormProps) => {
   };
 
   return (
-    <View style={{ ...styles.screen, gap: 10, backgroundColor: colors.background }}>
+    <View style={{ gap: 10, backgroundColor: colors.background }}>
       <TextInput
         value={title}
         onChangeText={(text: string) => setTitle(text)}
