@@ -1,31 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Recipe } from "../../typings/recipe";
 import Screen from "../../components/Screen";
 import RecipeItem from "./RecipeItem";
 import { MD2Colors, Snackbar } from "react-native-paper";
 import { View } from "react-native";
+import RecipeForm from "./RecipeForm";
 
 const RecipesScreen = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+  const [showRecipeForm, setShowRecipeForm] = useState<boolean>(false);
 
-  const addRecipe = () => {
-    setRecipes([
-      ...recipes,
-      { id: `${recipes.length + 1}`, title: `Recipe ${recipes.length + 1}` },
-    ]);
+  const saveRecipe = (newRecipe: Recipe) => {
+    newRecipe.id = newRecipe.id ? newRecipe.id : `${recipes.length + 1}`;
+    setRecipes([...recipes, newRecipe]);
     setShowSnackbar(true);
+    setShowRecipeForm(false);
   };
 
   return (
     <View>
       <Screen
-        TitleBarOptions={{ title: "Recipes", buttons: [{ icon: "plus", onPress: addRecipe }] }}
+        titleBarOptions={{
+          title: "Recipes",
+          buttons: [{ icon: "plus", onPress: () => setShowRecipeForm(true) }],
+        }}
       >
         {recipes.map((recipe: Recipe) => (
           <RecipeItem key={recipe.id} recipe={recipe} />
         ))}
       </Screen>
+      <RecipeForm
+        visible={showRecipeForm}
+        onCancel={() => setShowRecipeForm(false)}
+        onSave={saveRecipe}
+        initialRecipe={{
+          title: "",
+          country: "",
+          result: "",
+        }}
+      />
       <Snackbar
         children={"Recipe added"}
         visible={showSnackbar}

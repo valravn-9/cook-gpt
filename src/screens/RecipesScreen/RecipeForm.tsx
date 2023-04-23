@@ -1,33 +1,20 @@
-import { RouteProp } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
-import {
-  ActivityIndicator,
-  TextInput,
-  Button,
-  Text,
-  Snackbar,
-  MD2Colors,
-  useTheme,
-} from "react-native-paper";
-import { ScrollView, View } from "react-native";
+import { ActivityIndicator, TextInput, Button, Text } from "react-native-paper";
+import { ScrollView } from "react-native";
+import Form from "../../components/Form";
+import { Recipe } from "../../typings/recipe";
 
 interface IProps {
-  route?: RouteProp<any>;
+  initialRecipe: Recipe;
+  visible: boolean;
+  onCancel: () => void;
+  onSave: (recipe: Recipe) => void;
 }
 
-const RecipeForm = ({ route }: IProps) => {
-  const { colors } = useTheme();
-  const [title, setTitle] = useState<string>("New Recipe");
-  const [country, setCountry] = useState<string>("Germany");
-  const [recipeText, setRecipeText] = useState<string>("");
+const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
+  const [recipe, setRecipe] = useState<Recipe>(initialRecipe);
   const [loading, setLoading] = useState<boolean>(false);
-  const [snackbarVisible, setSnackbarVisible] = useState<boolean>(false);
-
-  useEffect(() => {
-    const initialRecipe = route?.params?.recipe ? route.params.recipe : { title: title };
-    setTitle(initialRecipe?.title);
-  }, []);
 
   const generateRecipe = async () => {
     const apiKey = "<YOUR_API_KEY>";
@@ -35,32 +22,38 @@ const RecipeForm = ({ route }: IProps) => {
       apiKey: apiKey,
     });
     const openAI = new OpenAIApi(configuration);
-    const requestText = `Can you generate me a recipe from ${country}`;
+    const requestText = `Can you generate me a recipe from ${recipe?.country}`;
     setLoading(true);
     try {
       const response = await openAI.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: requestText }],
       });
-      setRecipeText(`${response.data.choices[0].message?.content}`);
+      setRecipe({ ...recipe, result: `${response.data.choices[0].message?.content}` });
     } catch (error) {
-      setSnackbarVisible(true);
+      alert(error);
     }
     setLoading(false);
   };
 
   return (
-    <View style={{ gap: 10, backgroundColor: colors.background }}>
+    <Form
+      title={"Recipe Form"}
+      visible={visible}
+      onCancel={onCancel}
+      onSave={() => onSave(recipe)}
+      item={{}}
+    >
       <TextInput
-        value={title}
-        onChangeText={(text: string) => setTitle(text)}
+        value={recipe.title}
+        onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
         placeholder="Enter title"
         mode="outlined"
         label={"Title"}
       />
       <TextInput
-        value={country}
-        onChangeText={(country: string) => setCountry(country)}
+        value={recipe.country}
+        onChangeText={(text: string) => setRecipe({ ...recipe, country: text })}
         placeholder="Enter country"
         mode="outlined"
         label={"Country"}
@@ -72,18 +65,13 @@ const RecipeForm = ({ route }: IProps) => {
           justifyContent: "center",
         }}
       >
-        {loading ? <ActivityIndicator animating={true} size="large" /> : <Text>{recipeText}</Text>}
+        {loading ? (
+          <ActivityIndicator animating={true} size="large" />
+        ) : (
+          <Text>{recipe.result}</Text>
+        )}
       </ScrollView>
-      <Snackbar
-        children={"Could not generate recipe"}
-        visible={snackbarVisible}
-        duration={3000}
-        onDismiss={() => setSnackbarVisible(false)}
-        icon="close"
-        onIconPress={() => setSnackbarVisible(false)}
-        style={{ backgroundColor: MD2Colors.red500 }}
-      />
-    </View>
+    </Form>
   );
 };
 
