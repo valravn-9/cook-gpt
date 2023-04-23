@@ -1,17 +1,10 @@
-import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import styles from "../../../styles";
 import { Recipe } from "../../typings/recipe";
-import { AppScreen } from "../../typings/app";
-import { useTheme } from "react-native-paper";
+import Titlebar from "../../components/Titlebar";
+import Screen from "../../components/Screen";
+import { List } from "react-native-paper";
 
-interface RecipesScreenProps {
-  navigation?: NavigationProp<any>;
-}
-
-const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
-  const { colors } = useTheme();
+const RecipesScreen = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -23,21 +16,13 @@ const RecipesScreen = ({ navigation }: RecipesScreenProps) => {
   }, []);
 
   return (
-    <View style={{ ...styles.screen, backgroundColor: colors.background }}>
-      <FlatList
-        data={recipes}
-        keyExtractor={(recipe: Recipe) => recipe.title}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => navigation?.navigate(AppScreen.RECIPE_FORM, { recipe: item })}
-            >
-              <Text style={{ ...styles.listEntry }}>{item.title}</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
+    <Screen
+      titlebarOptions={{ title: "Recipes", buttons: [{ icon: "plus", onPress: () => void 0 }] }}
+    >
+      {recipes.map((recipe: Recipe) => (
+        <List.Item key={recipe.id} title={recipe.title}></List.Item>
+      ))}
+    </Screen>
   );
 };
 

@@ -1,17 +1,20 @@
-import React, { ReactNode } from "react";
-import { StyleSheet } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import { Surface } from "react-native-paper";
+import Titlebar from "./Titlebar";
+import { IScreenProps } from "../typings/screen";
 
-interface IScreenProps {
-  children: ReactNode;
-}
-
-const Screen = ({ children }: IScreenProps) => {
-  return <Surface style={styles.surface}>{children}</Surface>;
+const Screen = ({ titlebarOptions, children }: IScreenProps) => {
+  return (
+    <Surface style={styles.surface}>
+      <Titlebar {...titlebarOptions} />
+      <ScrollView>{children}</ScrollView>
+    </Surface>
+  );
 };
 
 const styles = StyleSheet.create({
-  surface: { flex: 1 },
+  surface: { height: "100%" },
 });
 
 export default Screen;

@@ -1,16 +1,6 @@
 import React from "react";
 import { Appbar } from "react-native-paper";
-
-interface IButtonProps {
-  icon: string;
-  onPress: () => void;
-}
-
-interface ITitlebarProps {
-  title: string;
-  backButton?: IButtonProps;
-  buttons?: IButtonProps[];
-}
+import { ITitlebarProps, IButtonProps } from "../typings/titlebar";
 
 const Titlebar = ({ title, buttons, backButton }: ITitlebarProps) => {
   return (
