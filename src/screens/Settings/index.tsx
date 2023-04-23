@@ -1,11 +1,13 @@
 import React from "react";
-import { View } from "react-native";
-import styles from "../../../styles";
-import { useTheme } from "react-native-paper";
+import Titlebar from "../../components/Titlebar";
+import Screen from "../../components/Screen";
 
 const SettingsScreen = () => {
-  const { colors } = useTheme();
-  return <View style={{ ...styles.screen, backgroundColor: colors.background }}></View>;
+  return (
+    <Screen>
+      <Titlebar title="Settings" />
+    </Screen>
+  );
 };
 
 export default SettingsScreen;

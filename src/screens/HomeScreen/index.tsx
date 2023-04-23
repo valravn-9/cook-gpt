@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
-import styles from "../../../styles";
-import { useTheme } from "react-native-paper";
+import Titlebar from "../../components/Titlebar";
+import Screen from "../../components/Screen";
 
 const HomeScreen = () => {
-  const { colors } = useTheme();
-  return <View style={{ ...styles.screen, backgroundColor: colors.background }}></View>;
+  return (
+    <Screen>
+      <Titlebar title="Home" />
+    </Screen>
+  );
 };
 
 export default HomeScreen;
