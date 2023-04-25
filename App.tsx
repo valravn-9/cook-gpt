@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { CommonActions, NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./src/screens/HomeScreen";
 import RecipesScreen from "./src/screens/RecipesScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
-import ShoppingScreen from "./src/screens/ShoppingScreen";
 import "react-native-url-polyfill/auto";
 import { BottomNavigation, MD3Theme, Provider as PaperProvider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -58,32 +56,12 @@ const App = () => {
           )}
         >
           <Tab.Screen
-            name={AppScreen.HOME}
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color, size }) => {
-                return <Icon name="home" size={size} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
             name={AppScreen.RECIPES}
             component={RecipesScreen}
             options={{
               tabBarLabel: "Recipes",
               tabBarIcon: ({ color, size }) => {
                 return <Icon name="book-open" size={size} color={color} />;
-              },
-            }}
-          />
-          <Tab.Screen
-            name={AppScreen.SHOPPING}
-            component={ShoppingScreen}
-            options={{
-              tabBarLabel: "Shopping",
-              tabBarIcon: ({ color, size }) => {
-                return <Icon name="cart" size={size} color={color} />;
               },
             }}
           />
