@@ -13,6 +13,7 @@ const RecipesScreen = () => {
 
   const saveRecipe = (newRecipe: Recipe) => {
     newRecipe.id = newRecipe.id ? newRecipe.id : `${recipes.length + 1}`;
+    newRecipe.title = newRecipe.title ? newRecipe.title : `Recipe ${recipes.length + 1}`;
     setRecipes([...recipes, newRecipe]);
     setShowSnackbar(true);
     setShowRecipeForm(false);
@@ -34,11 +35,7 @@ const RecipesScreen = () => {
         visible={showRecipeForm}
         onCancel={() => setShowRecipeForm(false)}
         onSave={saveRecipe}
-        initialRecipe={{
-          title: "",
-          country: "",
-          result: "",
-        }}
+        initialRecipe={{ title: `Recipe ${recipes.length + 1}`, country: "", persons: "", minutes: "", result: "" }}
       />
       <Snackbar
         children={"Recipe added"}
