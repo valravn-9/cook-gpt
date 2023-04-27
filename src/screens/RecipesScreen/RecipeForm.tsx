@@ -22,7 +22,10 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
       apiKey: apiKey,
     });
     const openAI = new OpenAIApi(configuration);
-    const requestText = `Can you generate me a recipe from ${recipe?.country}`;
+    const countryText = recipe?.country ? ` from ${recipe?.country}` : "";
+    const personsText = recipe?.persons ? ` for ${recipe?.persons} people` : "";
+    const minutesText = recipe?.minutes ? ` that takes ${recipe?.minutes} minutes or less to be done` : "";
+    const requestText = `Can you generate me a recipe${countryText}${personsText}${minutesText}?`;
     setLoading(true);
     try {
       const response = await openAI.createChatCompletion({
@@ -37,20 +40,14 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
   };
 
   return (
-    <Form
-      title={"Recipe Form"}
-      visible={visible}
-      onCancel={onCancel}
-      onSave={() => onSave(recipe)}
-      item={recipe}
-    >
+    <Form title={"Recipe Form"} visible={visible} onCancel={onCancel} onSave={() => onSave(recipe)} item={recipe}>
       <View style={{ gap: 10 }}>
         <TextInput
           value={recipe.title}
           onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
           placeholder="Enter title"
           mode="outlined"
-          label={"Title"}
+          label={"Title*"}
         />
         <TextInput
           value={recipe.country}
@@ -59,12 +56,23 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
           mode="outlined"
           label={"Country"}
         />
-        <Button
-          children={"Generate Recipe"}
-          icon="robot"
-          onPress={generateRecipe}
-          mode="contained"
+        <TextInput
+          value={recipe.persons}
+          onChangeText={(text: string) => setRecipe({ ...recipe, persons: text })}
+          placeholder="Enter persons"
+          mode="outlined"
+          label={"Persons"}
+          keyboardType="numeric"
         />
+        <TextInput
+          value={recipe.minutes}
+          onChangeText={(text: string) => setRecipe({ ...recipe, minutes: text })}
+          placeholder="Enter minutes"
+          mode="outlined"
+          label={"Minutes"}
+          keyboardType="numeric"
+        />
+        <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} mode="contained" />
 
         {loading ? (
           <ActivityIndicator animating={true} size="large" />
