@@ -5,12 +5,13 @@ import { Recipe } from "../../typings/recipe";
 
 interface IProps {
   recipe: Recipe;
+  onPress: () => void;
 }
 
-const RecipeItem = ({ recipe }: IProps) => {
+const RecipeItem = ({ recipe, onPress }: IProps) => {
   return (
     <Card.Content>
-      <List.Item title={recipe.title} />
+      <List.Item title={recipe.title} onPress={onPress} />
       <Divider />
     </Card.Content>
   );
