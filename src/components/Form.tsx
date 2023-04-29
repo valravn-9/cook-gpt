@@ -4,18 +4,17 @@ import { Portal, Modal, Surface, Appbar, useTheme } from "react-native-paper";
 
 interface IProps {
   title: string;
-  visible: boolean;
   onCancel: () => void;
   onSave?: (item: any) => void;
   item: any;
   children: ReactNode;
 }
 
-const Form = ({ title, visible, onCancel, onSave, children, item }: IProps) => {
+const Form = ({ title, onCancel, onSave, children, item }: IProps) => {
   const { colors } = useTheme();
   return (
     <Portal>
-      <Modal visible={visible} onDismiss={onCancel} contentContainerStyle={{ position: "absolute", left: 0, right: 0, bottom: 0, top: 0 }}>
+      <Modal visible={true} onDismiss={onCancel} contentContainerStyle={{ position: "absolute", left: 0, right: 0, bottom: 0, top: 0 }}>
         <Surface style={{ height: "100%" }}>
           <Appbar.Header statusBarHeight={0}>
             <Appbar.Action icon="close" onPress={onCancel} color={colors.primary} />

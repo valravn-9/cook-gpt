@@ -7,12 +7,11 @@ import { Recipe } from "../../typings/recipe";
 
 interface IProps {
   initialRecipe: Recipe;
-  visible: boolean;
   onCancel: () => void;
   onSave: (recipe: Recipe) => void;
 }
 
-const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
+const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
   const [recipe, setRecipe] = useState<Recipe>(initialRecipe);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,7 +39,7 @@ const RecipeForm = ({ initialRecipe, visible, onCancel, onSave }: IProps) => {
   };
 
   return (
-    <Form title={"Recipe Form"} visible={visible} onCancel={onCancel} onSave={() => onSave(recipe)} item={recipe}>
+    <Form title={"Recipe Form"} onCancel={onCancel} onSave={() => onSave(recipe)} item={recipe}>
       <View style={{ gap: 10 }}>
         <TextInput
           value={recipe.title}
