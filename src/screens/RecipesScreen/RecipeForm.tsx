@@ -88,7 +88,7 @@ const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
           onChangeText={(text: string) => setRecipe({ ...recipe, result: text })}
           placeholder="Enter Recipe content"
           mode="outlined"
-          label={"Recipe content"}
+          label={"Recipe content*"}
           multiline={true}
           disabled={true}
         />
