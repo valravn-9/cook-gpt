@@ -12,7 +12,7 @@ interface IProps {
 const RecipeDetails = ({ recipe, onClose }: IProps) => {
   return (
     <Form title={recipe?.title ? recipe.title : "Recipe Details"} onCancel={onClose} item={recipe}>
-      <View style={{ gap: 10 }}>
+      <View style={{ paddingBottom: 20, gap: 10 }}>
         {recipe?.title ? <Text>{recipe.title}</Text> : void 0}
         {recipe?.veggie && recipe.veggie !== Veggie.ALL ? <Text>{recipe?.veggie}</Text> : void 0}
         {recipe?.country ? <Text>from {recipe.country}</Text> : void 0}
