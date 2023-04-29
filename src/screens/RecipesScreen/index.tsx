@@ -41,6 +41,10 @@ const RecipesScreen = () => {
     setShowRecipeDetails(true);
   };
 
+  const deleteRecipe = (recipe: Recipe) => {
+    setRecipes(recipes.filter((r) => r.id !== recipe.id));
+  };
+
   return (
     <View>
       <Screen
@@ -50,7 +54,7 @@ const RecipesScreen = () => {
         }}
       >
         {recipes.map((recipe: Recipe) => (
-          <RecipeItem key={recipe.id} recipe={recipe} onPress={() => openRecipeDetails(recipe)} />
+          <RecipeItem key={recipe.id} recipe={recipe} onPress={() => openRecipeDetails(recipe)} onDelete={() => deleteRecipe(recipe)} />
         ))}
       </Screen>
       {currentRecipe && showRecipeForm ? <RecipeForm onCancel={() => resetStates()} onSave={saveRecipe} initialRecipe={currentRecipe} /> : void 0}
