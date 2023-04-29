@@ -6,9 +6,10 @@ import { MD2Colors, Snackbar } from "react-native-paper";
 import { View } from "react-native";
 import RecipeForm from "./RecipeForm";
 import RecipeDetails from "./RecipeDetails";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const RecipesScreen = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useLocalStorage("recipes", [] as Recipe[]);
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
   const [showRecipeForm, setShowRecipeForm] = useState<boolean>(false);
   const [showRecipeDetails, setShowRecipeDetails] = useState<boolean>(false);
