@@ -67,7 +67,7 @@ const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
         label={"Minutes"}
         keyboardType="numeric"
       />
-      <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} mode="contained" />
+      <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} mode="contained" disabled={loading} />
 
       {loading ? (
         <ActivityIndicator animating={true} size="large" />
