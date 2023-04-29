@@ -1,9 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
-
-const apiKey = "<Your API Key>";
+import openAIKey from "./openAIKey";
 
 const configuration = new Configuration({
-  apiKey: apiKey,
+  apiKey: openAIKey || "",
 });
 
 const getChatCompletion = async (content: string): Promise<string | undefined> => {
