@@ -38,8 +38,16 @@ const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
     setLoading(false);
   };
 
+  const isValid = () => {
+    return recipe.title && recipe.result;
+  };
+
+  const saveRecipe = () => {
+    isValid() ? onSave(recipe) : alert("Please fill in all required fields");
+  };
+
   return (
-    <Form title={"Recipe Form"} onCancel={onCancel} onSave={() => onSave(recipe)} item={recipe}>
+    <Form title={"Recipe Form"} onCancel={onCancel} onSave={saveRecipe} item={recipe}>
       <TextInput
         value={recipe.title}
         onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
