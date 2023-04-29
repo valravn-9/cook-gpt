@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Portal, Modal, Surface, Appbar, useTheme } from "react-native-paper";
 
 interface IProps {
@@ -17,7 +17,7 @@ const Form = ({ title, onCancel, onSave, children, item }: IProps) => {
       <Modal
         visible={true}
         onDismiss={onCancel}
-        contentContainerStyle={{ gap: 10, position: "absolute", left: 0, right: 0, bottom: 0, top: 0, backgroundColor: colors.background }}
+        contentContainerStyle={{ position: "absolute", left: 0, right: 0, bottom: 0, top: 0, backgroundColor: colors.background }}
       >
         <Surface style={{ height: "100%" }}>
           <Appbar.Header statusBarHeight={0}>
@@ -25,7 +25,9 @@ const Form = ({ title, onCancel, onSave, children, item }: IProps) => {
             <Appbar.Content title={title} />
             {onSave ? <Appbar.Action icon="content-save" onPress={() => onSave(item)} color={colors.primary} /> : void 0}
           </Appbar.Header>
-          <ScrollView style={{ padding: 10 }}>{children}</ScrollView>
+          <ScrollView style={{ padding: 10 }}>
+            <View style={{ gap: 10 }}>{children}</View>
+          </ScrollView>
         </Surface>
       </Modal>
     </Portal>
