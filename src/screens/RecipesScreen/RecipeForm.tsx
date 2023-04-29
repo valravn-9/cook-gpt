@@ -4,6 +4,7 @@ import { ActivityIndicator, TextInput, Button } from "react-native-paper";
 import { View } from "react-native";
 import Form from "../../components/Form";
 import { Recipe } from "../../typings/recipe";
+import getChatCompletion from "../../api/openAI";
 
 interface IProps {
   initialRecipe: Recipe;
@@ -16,25 +17,13 @@ const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const generateRecipe = async () => {
-    const apiKey = "<Your API Key>";
-    const configuration = new Configuration({
-      apiKey: apiKey,
-    });
-    const openAI = new OpenAIApi(configuration);
     const countryText = recipe?.country ? ` from ${recipe?.country}` : "";
     const personsText = recipe?.persons ? ` for ${recipe?.persons} people` : "";
     const minutesText = recipe?.minutes ? ` that takes ${recipe?.minutes} minutes or less to be done` : "";
     const requestText = `Can you generate me a recipe${countryText}${personsText}${minutesText}?`;
     setLoading(true);
-    try {
-      const response = await openAI.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: requestText }],
-      });
-      setRecipe({ ...recipe, result: `${response.data.choices[0].message?.content}` });
-    } catch (error) {
-      alert(error);
-    }
+    const response = await getChatCompletion(requestText);
+    response ? setRecipe({ ...recipe, result: response }) : void 0;
     setLoading(false);
   };
 
