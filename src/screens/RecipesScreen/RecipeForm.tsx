@@ -40,53 +40,51 @@ const RecipeForm = ({ initialRecipe, onCancel, onSave }: IProps) => {
 
   return (
     <Form title={"Recipe Form"} onCancel={onCancel} onSave={() => onSave(recipe)} item={recipe}>
-      <View style={{ gap: 10 }}>
-        <TextInput
-          value={recipe.title}
-          onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
-          placeholder="Enter title"
-          mode="outlined"
-          label={"Title*"}
-        />
-        <TextInput
-          value={recipe.country}
-          onChangeText={(text: string) => setRecipe({ ...recipe, country: text })}
-          placeholder="Enter country"
-          mode="outlined"
-          label={"Country"}
-        />
-        <TextInput
-          value={recipe.persons}
-          onChangeText={(text: string) => setRecipe({ ...recipe, persons: text })}
-          placeholder="Enter persons"
-          mode="outlined"
-          label={"Persons"}
-          keyboardType="numeric"
-        />
-        <TextInput
-          value={recipe.minutes}
-          onChangeText={(text: string) => setRecipe({ ...recipe, minutes: text })}
-          placeholder="Enter minutes"
-          mode="outlined"
-          label={"Minutes"}
-          keyboardType="numeric"
-        />
-        <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} mode="contained" />
+      <TextInput
+        value={recipe.title}
+        onChangeText={(text: string) => setRecipe({ ...recipe, title: text })}
+        placeholder="Enter title"
+        mode="outlined"
+        label={"Title*"}
+      />
+      <TextInput
+        value={recipe.country}
+        onChangeText={(text: string) => setRecipe({ ...recipe, country: text })}
+        placeholder="Enter country"
+        mode="outlined"
+        label={"Country"}
+      />
+      <TextInput
+        value={recipe.persons}
+        onChangeText={(text: string) => setRecipe({ ...recipe, persons: text })}
+        placeholder="Enter persons"
+        mode="outlined"
+        label={"Persons"}
+        keyboardType="numeric"
+      />
+      <TextInput
+        value={recipe.minutes}
+        onChangeText={(text: string) => setRecipe({ ...recipe, minutes: text })}
+        placeholder="Enter minutes"
+        mode="outlined"
+        label={"Minutes"}
+        keyboardType="numeric"
+      />
+      <Button children={"Generate Recipe"} icon="robot" onPress={generateRecipe} mode="contained" />
 
-        {loading ? (
-          <ActivityIndicator animating={true} size="large" />
-        ) : (
-          <TextInput
-            value={recipe.result}
-            onChangeText={(text: string) => setRecipe({ ...recipe, result: text })}
-            placeholder="Enter Recipe content"
-            mode="outlined"
-            label={"Recipe content"}
-            multiline={true}
-            disabled={true}
-          />
-        )}
-      </View>
+      {loading ? (
+        <ActivityIndicator animating={true} size="large" />
+      ) : (
+        <TextInput
+          value={recipe.result}
+          onChangeText={(text: string) => setRecipe({ ...recipe, result: text })}
+          placeholder="Enter Recipe content"
+          mode="outlined"
+          label={"Recipe content"}
+          multiline={true}
+          disabled={true}
+        />
+      )}
     </Form>
   );
 };

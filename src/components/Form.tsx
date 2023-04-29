@@ -14,7 +14,11 @@ const Form = ({ title, onCancel, onSave, children, item }: IProps) => {
   const { colors } = useTheme();
   return (
     <Portal>
-      <Modal visible={true} onDismiss={onCancel} contentContainerStyle={{ position: "absolute", left: 0, right: 0, bottom: 0, top: 0 }}>
+      <Modal
+        visible={true}
+        onDismiss={onCancel}
+        contentContainerStyle={{ gap: 10, position: "absolute", left: 0, right: 0, bottom: 0, top: 0, backgroundColor: colors.background }}
+      >
         <Surface style={{ height: "100%" }}>
           <Appbar.Header statusBarHeight={0}>
             <Appbar.Action icon="close" onPress={onCancel} color={colors.primary} />
